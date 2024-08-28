@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.sitemap {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4列のグリッド */
+    gap: 20px;
+    justify-items: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.node {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.node a {
+    text-decoration: none;
+    color: #0073e6;
+    font-weight: bold;
+}
+
+.node a:hover {
+    text-decoration: underline;
+}
+
+/* 各ノード間に線を引く */
+.sitemap::before,
+.node::before {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background-color: #ddd;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.home::before {
+    content: none; /* ホームノードには線を引かない */
+}
+
+.about::before {
+    top: auto;
+    height: 50%;
+    width: 2px;
+}
+
+.about::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    background-color: #ddd;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.services::before {
+    top: auto;
+    height: 50%;
+    width: 2px;
+}
+
+.services::after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 2px;
+    background-color: #ddd;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.team::before,
+.history::before,
+.consulting::before,
+.development::before {
+    content: none; /* 子ノードには上からの線を引かない */
+}
+
+.team::after,
+.history::after,
+.consulting::after,
+.development::after {
+    content: none; /* 子ノードには左右の線を引かない */
+}

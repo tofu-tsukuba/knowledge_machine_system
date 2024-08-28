@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流れと繋がりで理解する知能機械システム</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.20.0/cytoscape.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        #cy {
+            width: 90%;
+            height: 70vh;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #resetButton {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #0073e6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #resetButton:hover {
+            background-color: #005bb5;
+        }
+
+        footer {
+            font-size: 14px;
+            color: #666;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>流れと繋がりで理解する知能機械システム</h1>
+    <div id="cy"></div>
+    <button id="resetButton">Reset Layout</button>
+
+    <footer>&copy; 2024 tofu.</footer>
+
+    <script>
+        var cy = cytoscape({
+            container: document.getElementById('cy'),
+
+            style: [
+                {
+                    selector: 'node',
+                    style: {
+                        'background-color': '#0073e6',
+                        'label': 'data(label)',
+                        'color': '#fff',
+                        'text-valign': 'center',
+                        'text-halign': 'center',
+                        'font-size': 'mapData(size, 40, 100, 12, 24)', // ノードのサイズに基づいてフォントサイズを調整
+                        'text-wrap': 'wrap', // テキストを複数行にする
+                        'width': 'mapData(size, 40, 100, 80, 200)', // ノードのサイズを全体的に大きく設定
+                        'height': 'mapData(size, 40, 100, 80, 200)', // ノードのサイズを全体的に大きく設定
+                        'shape': 'ellipse',
+                        'border-width': 2,
+                        'border-color': '#004a99',
+                        'padding': '5px' // パディングを適切に設定
+                    }
+                },
+                {
+                    selector: 'edge',
+                    style: {
+                        'width': 3,
+                        'line-color': '#ccc',
+                        'target-arrow-color': '#ccc',
+                        'target-arrow-shape': 'triangle',
+                        'curve-style': 'bezier'
+                    }
+                },
+                {
+                    selector: ':selected',
+                    style: {
+                        'background-color': '#004a99',
+                        'line-color': '#004a99',
+                        'target-arrow-color': '#004a99',
+                        'transition-property': 'background-color, line-color, target-arrow-color',
+                        'transition-duration': '0.25s'
+                    }
+                }
+            ],
+
+            elements: {
+                nodes: [
+                    { data: { id: '知能機械システム', label: '知能機械システム', size: 100, url: 'knowledge_machine_system.html' } },
+                    { data: { id: '制御工学', label: '制御工学', size: 80, url: 'control_engineering.html' } },
+                    { data: { id: '電気回路', label: '電気回路', size: 60, url: 'electrical_circuit.html' } },
+                    { data: { id: '機械力学', label: '機械力学', size: 60, url: 'mechanical_dynamics.html' } },
+                    { data: { id: 'メカトロニクス', label: 'メカトロニクス', size: 60, url: 'mechatronics.html' } },
+                    { data: { id: 'ロボット工学', label: 'ロボット工学', size: 80, url: 'robotics.html' } },
+                    { data: { id: 'センサ工学', label: 'センサ工学', size: 60, url: 'sensor_engineering.html' } },
+                    { data: { id: '電子工学', label: '電子工学', size: 60, url: 'electronics.html' } },
+                    { data: { id: '計測工学', label: '計測工学', size: 60, url: 'measurement_engineering.html' } },
+                    { data: { id: 'ヒューマンマシンインターフェース', label: 'ヒューマンマシンインターフェース', size: 60, url: 'human_machine_interface.html' } },
+                    { data: { id: 'バイオメカトロニクス', label: 'バイオメカトロニクス', size: 60, url: 'biomechatronics.html' } },
+                    { data: { id: '人工知能', label: '人工知能', size: 80, url: 'artificial_intelligence.html' } },
+                    { data: { id: '計算機工学', label: '計算機工学', size: 60, url: 'computer_engineering.html' } },
+                    { data: { id: 'コンピュータビジョン', label: 'コンピュータビジョン', size: 60, url: 'computer_vision.html' } },
+                    { data: { id: '情報理論', label: '情報理論', size: 60, url: 'information_theory.html' } },
+                    { data: { id: '信号処理', label: '信号処理', size: 80, url: 'signal_processing.html' } },
+                    { data: { id: '論理回路', label: '論理回路', size: 60, url: 'logic_circuits.html' } },
+                    { data: { id: '通信工学', label: '通信工学', size: 60, url: 'communications_engineering.html' } },
+                    { data: { id: '材料工学', label: '材料工学', size: 80, url: 'materials_engineering.html' } }
+                ],
+                edges: [
+                    { data: { source: '知能機械システム', target: '制御工学' } },
+                    { data: { source: '知能機械システム', target: 'ロボット工学' } },
+                    { data: { source: '知能機械システム', target: '人工知能' } },
+                    { data: { source: '知能機械システム', target: '信号処理' } },
+                    { data: { source: '知能機械システム', target: '材料工学' } },
+                    { data: { source: '制御工学', target: '電気回路' } },
+                    { data: { source: '制御工学', target: '機械力学' } },
+                    { data: { source: '制御工学', target: 'メカトロニクス' } },
+                    { data: { source: 'ロボット工学', target: 'センサ工学' } },
+                    { data: { source: 'ロボット工学', target: '電子工学' } },
+                    { data: { source: 'ロボット工学', target: '計測工学' } },
+                    { data: { source: 'ロボット工学', target: 'ヒューマンマシンインターフェース' } },
+                    { data: { source: 'ロボット工学', target: 'バイオメカトロニクス' } },
+                    { data: { source: '人工知能', target: '計算機工学' } },
+                    { data: { source: '人工知能', target: 'コンピュータビジョン' } },
+                    { data: { source: '人工知能', target: '情報理論' } },
+                    { data: { source: '信号処理', target: '論理回路' } },
+                    { data: { source: '信号処理', target: '通信工学' } },
+                    { data: { source: '信号処理', target: '情報理論' } },
+                    { data: { source: '材料工学', target: '電子工学' } },
+                    { data: { source: '材料工学', target: 'バイオメカトロニクス' } }
+                ]
+            },
+
+            layout: {
+                name: 'concentric',
+                concentric: function(node) {
+                    if (node.id() === '知能機械システム') {
+                        return 4;
+                    } else if (['制御工学', 'ロボット工学', '人工知能', '信号処理', '材料工学'].includes(node.id())) {
+                        return 3;
+                    } else if (['電気回路', '機械力学', 'メカトロニクス', 'センサ工学', '電子工学', '計測工学', 'ヒューマンマシンインターフェース', 'バイオメカトロニクス', '計算機工学', 'コンピュータビジョン', '情報理論', '論理回路', '通信工学'].includes(node.id())) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
+                },
+                levelWidth: function(nodes) {
+                    return 1;
+                },
+                padding: 10,
+                animate: true
+            }
+        });
+
+        // ノードをクリックしたときにURLに遷移するイベントリスナー
+        cy.on('tap', 'node', function(evt){
+            var node = evt.target;
+            var url = node.data('url');
+            if (url) {
+                window.open(url, '_blank'); // 新しいタブでURLを開く
+            }
+        });
+
+        // リセットボタンをクリックしたときの初期配置に戻す処理
+        document.getElementById('resetButton').addEventListener('click', function() {
+            cy.layout({
+                name: 'concentric',
+                concentric: function(node) {
+                    if (node.id() === '知能機械システム') {
+                        return 4;
+                    } else if (['制御工学', 'ロボット工学', '人工知能', '信号処理', '材料工学'].includes(node.id())) {
+                        return 3;
+                    } else if (['電気回路', '機械力学', 'メカトロニクス', 'センサ工学', '電子工学', '計測工学', 'ヒューマンマシンインターフェース', 'バイオメカトロニクス', '計算機工学', 'コンピュータビジョン', '情報理論', '論理回路', '通信工学'].includes(node.id())) {
+                        return 2;
+                    } else {
+                        return 1;
+                    }
+                },
+                levelWidth: function(nodes) {
+                    return 1;
+                },
+                padding: 10,
+                animate: true
+            }).run();
+        });
+    </script>
+</body>
+</html>
